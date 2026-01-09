@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yayasan Rumah Konservasi Laut</title>
@@ -10,7 +12,7 @@
             height: 100vh;
             width: 100%;
             background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
-                        url('asset/HeroBg.webp');
+                        url('asset/HeroBg.webp'); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -29,7 +31,6 @@
             line-height: 1.1;
             margin-bottom: 20px;
             text-transform: uppercase;
-            max-width: 900px; 
         }
 
         .hero-content p {
@@ -48,11 +49,6 @@
             height: 60px;  
             border: none;
             cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .btn-watch:hover {
-            transform: scale(1.05);
         }
     </style>
 </head>
@@ -66,21 +62,164 @@
             <p>
                 Upaya berkelanjutan untuk melindungi ekosistem laut melalui pendekatan berbasis 
                 Nature-Based Solutions yang kolaboratif, berdampak nyata, dan berkelanjutan. 
-                Ikuti Perjalanan Program Konservasi Kami!
             </p>
             <button class="btn-watch"></button>
         </div>
     </section>
+
+    <section class="status-bar">
+        <div class="status-item">
+            <h2 id="val-locations" class="gradient-text">0</h2>
+            <p>Locations</p>
+        </div>
+        <div class="status-item">
+            <h2 id="val-years" class="gradient-text">1</h2>
+            <p>Years</p>
+        </div>
+        <div class="status-item">
+            <h2 id="val-adopter" class="gradient-text">0</h2>
+            <p>Adopter</p>
+        </div>
+        <div class="status-item">
+            <h2 id="val-ecosystems" class="gradient-text">0</h2>
+            <p>Ecosystems Restored</p>
+        </div>
+    </section>
+
+    <section class="fact-coral">
+        <div class="fact-container">
+            <div class="fact-header-row">
+                <div class="fact-text">
+                    <p class="fact-description">
+                        Pemutihan karang membuat pemulihan membutuhkan waktu hingga 10-15 tahun, 
+                        sementara lebih dari 50% terumbu karang dunia telah mengalami kerusakan 
+                        dalam 30 tahun terakhir.
+                    </p>
+                </div>
+                
+                <div class="status-buttons-inline">
+                    <img src="asset/ButtonHealty.webp" alt="Healthy" class="btn-3d active" onclick="changeModel('normal')">
+                    <img src="asset/Buttonbleaching.webp" alt="Bleaching" class="btn-3d" onclick="changeModel('bleached')">
+                    <img src="asset/ButtonDead.webp" alt="Dead Coral" class="btn-3d" onclick="changeModel('dead')">
+                </div>
+            </div>
+    
+            <div id="container-3d"></div>
+    
+            <div class="type-buttons">
+                <img src="asset/ButtonCoral.webp" alt="Coral" class="btn-type">
+                <img src="asset/ButtonSeagrass.webp" alt="Seagrass" class="btn-type">
+                <img src="asset/ButtonMangrove.webp" alt="Mangrove" class="btn-type">
+                <img src="asset/ButtonClam.webp" alt="Giant Clam" class="btn-type">
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .fact-coral {
+            background-color: #000;
+            padding: 80px 5%;
+            color: white;
+        }
+
+        .fact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .fact-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end; 
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .fact-text {
+            flex: 1;
+        }
+
+        .fact-label {
+            color: #555;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .fact-description {
+            color: #ccc;
+            max-width: 500px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .status-buttons-inline {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 5px; 
+        }
+
+        #container-3d {
+            width: 100%;
+            height: 800px;
+            margin: 0 auto;
+            cursor: grab;
+        }
+
+        .type-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: -30px;
+        }
+
+        .btn-3d, .btn-type {
+            height: 45px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .btn-3d:hover, .btn-3d.active, .btn-type:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .btn-3d.active {
+            filter: brightness(1.2);
+        }
+    </style>
+    
+    <div id="admin-panel" class="admin-modal">
+        <div class="modal-content" id="login-form">
+            <h3>Admin Login</h3>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="handleLogin()">Login</button>
+            <button onclick="closeAdmin()" style="background:#444">Cancel</button>
+        </div>
+    
+        <div class="modal-content" id="edit-form" style="display: none;">
+            <h3>Update Stats</h3>
+            <label>Locations: <input type="number" id="input-locations"></label>
+            <label>Years: <input type="number" id="input-years"></label>
+            <label>Adopter: <input type="number" id="input-adopter"></label>
+            <label>Ecosystems: <input type="number" id="input-ecosystems"></label>
+            <button onclick="updateStats()">Save Changes</button>
+            <button onclick="logoutAdmin()" style="background:#444">Logout</button>
+        </div>
+    </div>
 
     <script>
         fetch('navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
-                initDropdown(); 
+                initNavbarFeatures(); 
             });
 
-        function initDropdown() {
+        function initNavbarFeatures() {
             const triggers = document.querySelectorAll('.drop-trigger');
             triggers.forEach(trigger => {
                 trigger.addEventListener('click', function(e) {
@@ -93,11 +232,121 @@
                 });
             });
 
+            const loginBtn = document.getElementById('login-btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function() {
+                    document.getElementById('admin-panel').style.display = 'flex';
+                });
+            }
+
             document.addEventListener('click', function() {
                 document.querySelectorAll('.dropdown').forEach(nav => {
                     nav.classList.remove('is-active');
                 });
             });
+        }
+
+        let scene, camera, renderer, model;
+        const loader = new THREE.GLTFLoader();
+
+        function init3D() {
+            const container = document.getElementById('container-3d');
+            
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(0, -0.4, 5);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            const light = new THREE.AmbientLight(0xffffff, 1.5);
+            scene.add(light);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+
+            loadCoralModel('normal');
+
+            animate();
+        }
+
+        function loadCoralModel(status) {
+            if (model) scene.remove(model);
+
+            const modelPath = `3d/${status}/Branchingcoral/Coral.gltf`;
+
+            loader.load(modelPath, function (gltf) {
+                model = gltf.scene;
+                
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                model.position.sub(center); 
+                model.scale.set(1, 1, 1); 
+                
+                scene.add(model);
+            }, undefined, function (error) {
+                console.error('Gagal memuat model:', error);
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (model) {
+                model.rotation.y += 0.002; 
+            }
+            renderer.render(scene, camera);
+        }
+
+        function changeModel(status) {
+            const clickedBtn = event.currentTarget;
+            document.querySelectorAll('.status-buttons-inline .btn-3d').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            clickedBtn.classList.add('active');
+            loadCoralModel(status);
+        }
+
+        window.addEventListener('load', init3D);
+
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('container-3d');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        function closeAdmin() { 
+            document.getElementById('admin-panel').style.display = 'none'; 
+        }
+
+        function handleLogin() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            if (u === "Admin" && p === "Admin123") {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('edit-form').style.display = 'flex';
+                document.getElementById('input-locations').value = document.getElementById('val-locations').innerText;
+                document.getElementById('input-years').value = document.getElementById('val-years').innerText;
+                document.getElementById('input-adopter').value = document.getElementById('val-adopter').innerText;
+                document.getElementById('input-ecosystems').value = document.getElementById('val-ecosystems').innerText;
+            } else {
+                alert("Username atau Password Salah!");
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('val-locations').innerText = document.getElementById('input-locations').value;
+            document.getElementById('val-years').innerText = document.getElementById('input-years').value;
+            document.getElementById('val-adopter').innerText = document.getElementById('input-adopter').value;
+            document.getElementById('val-ecosystems').innerText = document.getElementById('input-ecosystems').value;
+            closeAdmin();
+        }
+
+        function logoutAdmin() {
+            document.getElementById('login-form').style.display = 'flex';
+            document.getElementById('edit-form').style.display = 'none';
+            closeAdmin();
         }
     </script>
 </body>
