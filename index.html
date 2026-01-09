@@ -3,17 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Utama</title>
+    <title>Yayasan Rumah Konservasi Laut</title>
     <link rel="stylesheet" href="navbar.css">
+    <style>
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
+                        url('asset/HeroBg.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end; 
+            padding: 0 5% 100px 5%; 
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            max-width: 900px; 
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-watch {
+            display: inline-block;
+            background: url('asset/Herobutton.webp') no-repeat;
+            background-size: contain;
+            width: 250px; 
+            height: 60px;  
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-watch:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
 
     <div id="navbar-placeholder"></div>
 
-    <main style="padding: 50px;">
-        <h1>Konten Halaman</h1>
-        <p>Klik menu Explore, Learn, atau Grow With Us untuk melihat dropdown tetap terbuka.</p>
-    </main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>MEMULIHKAN DAN MENJAGA KEHIDUPAN BAWAH LAUT</h1>
+            <p>
+                Upaya berkelanjutan untuk melindungi ekosistem laut melalui pendekatan berbasis 
+                Nature-Based Solutions yang kolaboratif, berdampak nyata, dan berkelanjutan. 
+                Ikuti Perjalanan Program Konservasi Kami!
+            </p>
+            <button class="btn-watch"></button>
+        </div>
+    </section>
 
     <script>
         fetch('navbar.html')
@@ -25,7 +82,6 @@
 
         function initDropdown() {
             const triggers = document.querySelectorAll('.drop-trigger');
-
             triggers.forEach(trigger => {
                 trigger.addEventListener('click', function(e) {
                     e.stopPropagation();
