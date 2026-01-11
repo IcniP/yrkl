@@ -226,6 +226,120 @@
         </div>
     </section>
     
+    <section class="shop-section">
+        <div class="shop-container frosted-card">
+            <div class="shop-gallery-side">
+                <div class="side-img-wrapper"><img src="asset/shop/Produk2.png" alt="Product Thumbnail"></div>
+                <div class="side-img-wrapper"><img src="asset/shop/Produk2.png" alt="Product Thumbnail"></div>
+                <div class="side-img-wrapper"><img src="asset/shop/Produk2.png" alt="Product Thumbnail"></div>
+            </div>
+    
+            <div class="shop-main-display">
+                <img src="asset/shop/Produk.png" alt="Featured Product">
+            </div>
+    
+            <div class="shop-content">
+                <h2 class="shop-title">EXPLORE OUR COLLECTION</h2>
+                <p class="shop-desc">
+                    Setiap produk dirancang dengan makna. Terinspirasi dari laut dan gerakan konservasi, 
+                    koleksi ini menjadi simbol kontribusi kecil dengan dampak yang lebih besar untuk ocean sustainability.
+                </p>
+                <a href="#" class="shop-now-btn">
+                    <img src="asset/shop/Buttonshop.webp" alt="Shop Now">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="follow-journey">
+        <div class="ig-header">
+            <h2 class="section-label">FOLLOW OUR JOURNEY</h2>
+            <div id="instagram-feed" class="ig-grid">
+                <div class="ig-post"><a href="https://www.instagram.com/padma.itera" target="_blank"><img src="asset/follow/Content1.webp" alt="IG Post"></a></div>
+                <div class="ig-post"><a href="https://www.instagram.com/padma.itera" target="_blank"><img src="asset/follow/Content2.webp" alt="IG Post"></a></div>
+                <div class="ig-post"><a href="https://www.instagram.com/padma.itera" target="_blank"><img src="asset/follow/Content3.webp" alt="IG Post"></a></div>
+                <div class="ig-post"><a href="https://www.instagram.com/padma.itera" target="_blank"><img src="asset/follow/Content4.webp" alt="IG Post"></a></div>
+            </div>
+        </div>
+    
+        <div class="journey-main">
+            <div class="journey-slideshow">
+                <div class="journey-slide fade active" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('asset/follow/1.webp');"></div>
+                <div class="journey-slide fade" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('asset/follow/2.webp');"></div>
+                <div class="journey-slide fade" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('asset/follow/3.webp');"></div>
+            </div>
+            
+            <div class="journey-content">
+                <h1 class="journey-title">FOLLOW <br> OUR <br> JOURNEY</h1>
+                <p class="journey-desc">
+                    Dari laut hingga ke komunitas, perjalanan kami adalah tentang aksi nyata, pembelajaran, dan kolaborasi untuk menjaga ekosistem laut tetap hidup. Join us and see how conservation happens underwater.
+                </p>
+                
+                <div class="slideshow-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="join-movement">
+        <div class="movement-container">
+            <div class="movement-header">
+                <h2 class="gradient-text">JOIN OUR MOVEMENT</h2>
+                <p>Be part of a growing community that cares about the ocean. Dapatkan update terbaru seputar konservasi, restorasi terumbu karang, dan aktivitas kami langsung ke email kamu.</p>
+            </div>
+            
+            <div class="email-box">
+                <input type="email" placeholder="YOUR EMAIL" id="user-email">
+                <button type="button" class="btn-join">JOIN</button>
+            </div>
+        </div>
+    </section>
+
+    </section> <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="icon/Logo.png" alt="Logo" class="footer-logo">
+                <p class="footer-address">
+                    Jl. Terumbu Karang No. 123,<br>
+                    Kec. Konservasi Laut, Bandar Lampung,<br>
+                    Lampung, Indonesia 35141
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#">What We Do</a></li>
+                    <li><a href="#">Research</a></li>
+                    <li><a href="#">Journal</a></li>
+                    <li><a href="#">Track My Adopt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3>Learn</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Financial Report</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="icon/Instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="icon/Tiktok.png" alt="Tiktok"></a>
+                    <a href="#"><img src="icon/Youtube.png" alt="Youtube"></a>
+                </div>
+                <p class="copyright">&copy; 2025 Padma Itera. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <style>
         .fact-coral {
                 background: url('asset/factbackground.png') no-repeat center center;
@@ -482,6 +596,31 @@
         }
 
         showSlides();
+
+
+        let journeyIndex = 0;
+        const journeySlides = document.querySelectorAll('.journey-slide');
+        const journeyDots = document.querySelectorAll('.slideshow-dots .dot');
+
+        function runJourneySlideshow() {
+            // Reset slides and dots
+            journeySlides.forEach(s => s.classList.remove('active'));
+            journeyDots.forEach(d => d.classList.remove('active'));
+
+            journeyIndex++;
+            if (journeyIndex > journeySlides.length) { journeyIndex = 1; }
+
+            // Set active
+            journeySlides[journeyIndex - 1].classList.add('active');
+            journeyDots[journeyIndex - 1].classList.add('active');
+
+            setTimeout(runJourneySlideshow, 5000); // Ganti gambar tiap 5 detik
+        }
+
+        // Jalankan saat halaman siap
+        document.addEventListener('DOMContentLoaded', () => {
+            runJourneySlideshow();
+        });
     </script>
 </body>
 </html>
