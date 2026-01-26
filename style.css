@@ -729,15 +729,157 @@
     transform: scale(1.02);
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-    .movement-header {
+/* RESPONSIVE DESIGN (MOBILE & TABLET)*/
+
+   @media (max-width: 768px) {
+    /* 1. HERO SECTION */
+    .hero {
+        padding: 0 5% 50px 5%;
+        align-items: center;
+        text-align: center;
+    }
+    .hero-content h1 {
+        font-size: 32px;
+    }
+    .hero-content p {
+        font-size: 14px;
+        margin: 0 auto 30px auto;
+    }
+
+    /* 2. STATUS BAR */
+    .status-bar {
         flex-direction: column;
+        gap: 40px;
+        padding: 50px 5%;
+    }
+    .gradient-text {
+        font-size: 48px;
+    }
+
+    /* 3. FACT CORAL (3D Section) */
+    .fact-header-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    #container-3d {
+        height: 400px; 
+    }
+    .type-buttons {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .btn-type {
+        height: 35px;
+    }
+
+    /* 4. WHY CORAL MATTER */
+    .why-title {
+        font-size: 28px;
+        padding: 0 5%;
+        text-align: center;
+    }
+    .frosted-bar {
+        flex-direction: column;
+        gap: 30px;
+        padding: 40px 10%;
+    }
+    .divider {
+        width: 100%;
+        height: 1px;
+        margin: 0;
+    }
+
+    /* 5. SHOP SECTION */
+    .frosted-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    .shop-gallery-side {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .side-img-wrapper {
+        height: 80px;
+        width: 80px;
+    }
+    .shop-main-display {
+        height: 250px;
+    }
+    .shop-title {
+        font-size: 28px;
+        text-align: center;
+    }
+    .shop-desc {
+        text-align: center;
+    }
+    .shop-now-btn {
+        margin: 0 auto;
+    }
+
+    /* 6. JOIN MOVEMENT */
+    .movement-header h2 {
+        font-size: 32px;
+        text-align: center;
+    }
+    .movement-header p {
+        text-align: center;
+        margin: 0 auto;
+    }
+    .email-box {
+        margin-left: 0 !important; 
+        min-width: 100% !important;
+        flex-direction: column;
+        gap: 10px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 15px;
+        padding: 10px;
+    }
+    .btn-join {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .main-footer {
+        padding: 60px 10% 40px 10%;
+    }
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        text-align: left;
+    }
+    .footer-brand {
+        text-align: left;
+    }
+    .footer-logo {
+        height: 50px;
+    }
+    .footer-address {
+        font-size: 14px;
+        color: white;
+        margin-bottom: 20px;
+    }
+    
+    .footer-links-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
-    .movement-header h2 { font-size: 40px; }
-    .email-box {
-        min-width: 100%;
-        margin-left: 0;
+    .footer-links h3 {
+        display: none; 
+    }
+    .footer-links ul li a {
+        font-weight: bold;
+        color: white;
+    }
+
+    .footer-social {
+        border-top: 1px solid #333;
+        padding-top: 20px;
+    }
+    .social-icons {
+        justify-content: flex-start;
     }
 }
+ 

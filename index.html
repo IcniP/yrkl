@@ -312,19 +312,19 @@
             <div class="footer-links">
                 <h3>Explore</h3>
                 <ul>
-                    <li><a href="#">What We Do</a></li>
-                    <li><a href="#">Research</a></li>
-                    <li><a href="#">Journal</a></li>
-                    <li><a href="#">Track My Adopt</a></li>
+                    <li><a href="#">Track my Adopt</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">learn</a></li>
+                    <li><a href="#">Take Action</a></li>
                 </ul>
             </div>
 
             <div class="footer-links">
                 <h3>Learn</h3>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Team</a></li>
-                    <li><a href="#">Financial Report</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Book a Tour</a></li>
+                    <li><a href="#">Donate</a></li>
                 </ul>
             </div>
 
@@ -615,6 +615,27 @@
             journeyDots[journeyIndex - 1].classList.add('active');
 
             setTimeout(runJourneySlideshow, 5000); // Ganti gambar tiap 5 detik
+        }
+
+        function initNavbarFeatures() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links'); // Menargetkan ul asli Anda
+
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('active'); // Membuka menu ke bawah
+                });
+            }
+
+            // Kode dropdown klik Anda yang sudah ada
+            const triggers = document.querySelectorAll('.drop-trigger');
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const parent = this.parentElement;
+                    parent.classList.toggle('is-active');
+                });
+            });
         }
 
         // Jalankan saat halaman siap
