@@ -57,7 +57,7 @@
 
     <div id="navbar-placeholder"></div>
 
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-content">
             <h1>MEMULIHKAN DAN MENJAGA KEHIDUPAN BAWAH LAUT</h1>
             <p>
@@ -87,7 +87,7 @@
         </div>
     </section>
 
-    <section class="fact-coral">
+    <section id="explore" class="fact-coral">
         <div class="fact-container">
             <div class="fact-header-row">
                 <div class="fact-text">
@@ -116,7 +116,7 @@
         </div>
     </section>
 
-    <section class="why-coral">
+    <section id="learn" class="why-coral">
         <div class="slideshow-container">
             <div class="slide fade active" style="background-image: url('asset/WHY1.png');"></div>
             <div class="slide fade" style="background-image: url('asset/WHY2.png');"></div>
@@ -151,7 +151,7 @@
         </div>
     </section>
 
-    <section class="take-action">
+    <section id="take-action" class="take-action">
         <div class="action-header">
             <h2 class="gradient-text">TAKE ACTION FOR THE REEF TODAY</h2>
             <p>Every action counts. Whether you adopt, visit, or donate, you become part of a global effort to restore our ocean.</p>
@@ -193,7 +193,7 @@
         </div>
     </section>
 
-    <section class="core-section">
+    <section id="core" class="core-section">
         <div class="core-hero">
             <img src="asset/Core/Core.webp" alt="Conservation Team" class="core-bg-img">
             <div class="core-overlay-text">
@@ -226,7 +226,7 @@
         </div>
     </section>
     
-    <section class="shop-section">
+    <section id="shop" class="shop-section">
         <div class="shop-container frosted-card">
             <div class="shop-gallery-side">
                 <div class="side-img-wrapper"><img src="asset/shop/Produk2.png" alt="Product Thumbnail"></div>
@@ -452,32 +452,41 @@
                 initNavbarFeatures(); 
             });
 
-        function initNavbarFeatures() {
-            const triggers = document.querySelectorAll('.drop-trigger');
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const parent = this.parentElement;
-                    document.querySelectorAll('.dropdown').forEach(nav => {
-                        if (nav !== parent) nav.classList.remove('is-active');
+            function initNavbarFeatures() {
+                const triggers = document.querySelectorAll('.drop-trigger');
+                const dropdowns = document.querySelectorAll('.dropdown');
+                const hamburger = document.getElementById('hamburger');
+                const navLinks = document.querySelector('.nav-links');
+
+                triggers.forEach(trigger => {
+                    trigger.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const parent = this.parentElement;
+                        const wasActive = parent.classList.contains('is-active');
+
+                        dropdowns.forEach(nav => {
+                            nav.classList.remove('is-active');
+                        });
+
+                        if (!wasActive) {
+                            parent.classList.add('is-active');
+                        }
                     });
-                    parent.classList.toggle('is-active');
                 });
-            });
-
-            const loginBtn = document.getElementById('login-btn');
-            if (loginBtn) {
-                loginBtn.addEventListener('click', function() {
-                    document.getElementById('admin-panel').style.display = 'flex';
+                document.addEventListener('click', function() {
+                    dropdowns.forEach(nav => {
+                        nav.classList.remove('is-active');
+                    });
                 });
+                if (hamburger) {
+                    const newHamburger = hamburger.cloneNode(true);
+                    hamburger.parentNode.replaceChild(newHamburger, hamburger);
+                    
+                    newHamburger.addEventListener('click', function() {
+                        navLinks.classList.toggle('active');
+                    });
+                }
             }
-
-            document.addEventListener('click', function() {
-                document.querySelectorAll('.dropdown').forEach(nav => {
-                    nav.classList.remove('is-active');
-                });
-            });
-        }
 
         let scene, camera, renderer, model;
         const loader = new THREE.GLTFLoader();
@@ -617,28 +626,6 @@
             setTimeout(runJourneySlideshow, 5000); // Ganti gambar tiap 5 detik
         }
 
-        function initNavbarFeatures() {
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.querySelector('.nav-links'); // Menargetkan ul asli Anda
-
-            if (hamburger) {
-                hamburger.addEventListener('click', function() {
-                    navLinks.classList.toggle('active'); // Membuka menu ke bawah
-                });
-            }
-
-            // Kode dropdown klik Anda yang sudah ada
-            const triggers = document.querySelectorAll('.drop-trigger');
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const parent = this.parentElement;
-                    parent.classList.toggle('is-active');
-                });
-            });
-        }
-
-        // Jalankan saat halaman siap
         document.addEventListener('DOMContentLoaded', () => {
             runJourneySlideshow();
         });
